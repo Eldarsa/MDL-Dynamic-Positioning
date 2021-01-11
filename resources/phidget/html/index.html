@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+	<title>Phidget22 Control Panel</title>
+	<link rel="stylesheet" href="controlpanel/style/phidget22.min.css" />
+	<link rel="stylesheet" href="controlpanel/scripts/jstree/themes/default/style.min.css" />
+	<link rel="stylesheet" type="text/css" href="controlpanel/scripts/jquery-ui/themes/smoothness/jquery-ui.min.css">
+	<script src="sha256.min.js"></script>
+	<script src="phidget22.min.js"></script>
+	<script src="controlpanel/scripts/jquery-2.1.4.min.js"></script>
+	<script src="controlpanel/scripts/jquery-ui/jquery-ui.min.js"></script>
+	<script src="controlpanel/scripts/jquery-knob/jquery.knob.min.js"></script>
+	<script src="controlpanel/scripts/jstree/jstree.min.js"></script>
+	<script src="controlpanel/scripts/jstree-grid/jstreegrid.min.js"></script>
+	<script src="controlpanel/phidget22.controlpanel.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var panel = new phidget22.ControlPanel("controlPanel");
+			var conn = new phidget22.Connection({
+				hostname: window.location.hostname,
+				port: window.location.port,
+				name: window.location.host,
+				onAuthenticationNeeded: function() { return prompt('The Phidget Server at: ' + window.location.host + ' is password protected. Enter your password:'); },
+				onError: function(code, msg) { console.error("Connection Error:", msg); },
+				onConnect: function() { console.log("Connected"); },
+				onDisconnect: function() { console.log("Disconnected"); }
+			});
+			conn.connect().catch(function(err) {
+				conn.delete();
+				console.error("Error connecting", err);
+				alert('Failed to connect to server: ' + err);
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="control-panel-wrapper">
+		<div id="controlPanel"></div>
+	</div>
+</body>
+</html>
