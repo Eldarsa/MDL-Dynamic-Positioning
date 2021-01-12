@@ -26,5 +26,5 @@ Author: Eldar Sandanger
 #define SERIAL_NUMBER = 85753 //(is this correct)
 
 int main(void){
-    
+    printf("Test library");
 };
