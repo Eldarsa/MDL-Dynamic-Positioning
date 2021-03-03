@@ -8495,6 +8495,12 @@
         <member name="F:Phidget22.DeviceID.PN_HUM1001">
             <summary> Humidity Sensor </summary>
         </member>
+        <member name="F:Phidget22.DeviceID.PN_HUB0001">
+            <summary> Phidget USB VINT Hub with 6 ports </summary>
+        </member>
+        <member name="F:Phidget22.DeviceID.FirmwareUpgradeSTM32G0">
+            <summary> VINT Device in firmware upgrade mode, STM32G0 Proc. </summary>
+        </member>
         <member name="T:Phidget22.LogLevel">
             <summary>Phidget logging level
             </summary>

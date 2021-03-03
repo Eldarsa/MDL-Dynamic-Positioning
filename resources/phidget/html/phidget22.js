@@ -479,10 +479,10 @@
 			PN_HIN1001: 62,
 			PN_HIN1100: 63,
 			PN_HUB0000: 64,
-			PN_HUB0001: 65,
-			PN_HUB0002: 66,
+			PN_MESHHUB: 65,
+			PN_MESHDONGLE: 66,
 			PN_HUB0004: 67,
-			PN_HUB0005: 68,
+			PN_LIGHTNINGHUB: 68,
 			PN_HUM1000: 69,
 			PN_LCD1100: 70,
 			PN_LED1000: 71,
@@ -539,15 +539,19 @@
 			PN_HUM1001: 127,
 			PN_DCC1004: 128,
 			PN_DCC1005: 129,
-			PN_SPT_PROTO: 131,
+			PN_MOT0108: 131,
 			PN_ADP_RS232: 132,
 			PN_ADP_RS485_422: 133,
 			PN_ADP_SERIAL: 134,
 			PN_1067_1: 135,
 			HUM1100: 136,
-			VINTSPATIAL: 137,
+			MOT1102: 137,
 			VINTVINTACCEL: 138,
 			TP_DIAGNOSER: 139,
+			PN_MOT0109: 140,
+			PN_MOT0110: 141,
+			PN_HUB0001: 142,
+			FIRMWARE_UPGRADE_STM32G0: 143,
 		};
 		self.DeviceID = DeviceID;
 
@@ -1243,6 +1247,7 @@
 			BP_SETIOVOLTAGE: 168,
 			BP_DATAEXCHANGE: 169,
 			BP_SETHEATINGENABLED: 170,
+			BP_SETTXTIMEOUT: 171,
 		}
 
 
@@ -2598,11 +2603,11 @@
 					]
 				},
 				{
-					// VINTSPATIAL - Spatial Phidget
+					// MOT1102 - Spatial Phidget AHRS
 					i: 137,
 					c: 21, // PHIDCLASS_VINT
 					v: [100, 200],
-					s: "VINTSPATIAL",
+					s: "MOT1102",
 					ch: [
 						{
 							n: 1,
@@ -3077,8 +3082,21 @@
 					// FIRMWARE_UPGRADE_STM32F0 - VINT Firmware Upgrade (STM32F0)
 					i: 4093,
 					c: 21, // PHIDCLASS_VINT
-					v: [100, 200],
+					v: [100, 110],
 					s: "FIRMWARE_UPGRADE_STM32F0",
+					ch: [
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+					]
+				},
+				{
+					// FIRMWARE_UPGRADE_STM32G0 - VINT Firmware Upgrade (STM32G0)
+					i: 4093,
+					c: 21, // PHIDCLASS_VINT
+					v: [110, 200],
+					s: "FIRMWARE_UPGRADE_STM32G0",
 					ch: [
 						{
 							n: 1,
@@ -3930,7 +3948,7 @@
 					]
 				},
 				{
-					// 1047_200 - PhidgetEncoder HighSpeed 4-Input
+					// 1047_2 - PhidgetEncoder HighSpeed 4-Input
 					i: 79,
 					c: 5, // PHIDCLASS_ENCODER
 					v: [200, 300],
@@ -4758,11 +4776,71 @@
 					]
 				},
 				{
-					// SPT_PROTO - PhidgetSpatial Precision 3/3/3 Prototype
+					// MOT0108 - PhidgetSpatial 3/3/3
 					i: 131,
 					c: 17, // PHIDCLASS_SPATIAL
 					v: [100, 200],
-					s: "SPT_PROTO",
+					s: "MOT0108",
+					n: 0,
+					ch: [
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+						{
+							n: 1,
+							s: 112, // PHIDCHSUBCLASS_SPATIAL_AHRS
+						},
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+					]
+				},
+				{
+					// MOT0109 - PhidgetSpatial Precision 3/3/3
+					i: 140,
+					c: 17, // PHIDCLASS_SPATIAL
+					v: [100, 200],
+					s: "MOT0109",
+					n: 0,
+					ch: [
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+						{
+							n: 1,
+							s: 112, // PHIDCHSUBCLASS_SPATIAL_AHRS
+						},
+						{
+							n: 1,
+							s: 1, // PHIDCHSUBCLASS_NONE
+						},
+					]
+				},
+				{
+					// MOT0110 - PhidgetSpatial Precision 3/3/3
+					i: 141,
+					c: 17, // PHIDCLASS_SPATIAL
+					v: [100, 200],
+					s: "MOT0110",
 					n: 0,
 					ch: [
 						{
@@ -4802,11 +4880,11 @@
 					]
 				},
 				{
-					// HUB0000_V2 - 6-Port USB VINT Hub Phidget
+					// HUB0001 - 6-Port USB VINT Hub Phidget
 					i: 63,
 					c: 8, // PHIDCLASS_HUB
-					v: [200, 300],
-					s: "HUB0000",
+					v: [201, 300],
+					s: "HUB0001",
 					n: 0,
 					ch: [
 						{
@@ -4816,11 +4894,11 @@
 					]
 				},
 				{
-					// HUB0002 - Wireless VINT Dongle Phidget
+					// MESHDONGLE - Wireless VINT Dongle Phidget
 					i: 65,
 					c: 12, // PHIDCLASS_MESHDONGLE
 					v: [100, 200],
-					s: "HUB0002",
+					s: "MESHDONGLE",
 					n: 0,
 					ch: [
 						{
@@ -5028,11 +5106,11 @@
 			],
 			'MESH': [
 				{
-					// HUB0001 - 4-Port Wireless VINT Hub Phidget
+					// MESHHUB - 4-Port Wireless VINT Hub Phidget
 					i: 1,
 					c: 8, // PHIDCLASS_HUB
 					v: [100, 200],
-					s: "HUB0001",
+					s: "MESHHUB",
 					ch: [
 						{
 							n: 1,
@@ -5071,11 +5149,11 @@
 			],
 			'LIGHTNING': [
 				{
-					// HUB0005 - 6-Port Lighting VINT Hub Phidget
+					// LIGHTNINGHUB - 6-Port Lighting VINT Hub Phidget
 					i: 66,
 					c: 8, // PHIDCLASS_HUB
 					v: [100, 200],
-					s: "HUB0005",
+					s: "LIGHTNINGHUB",
 					ch: [
 						{
 							n: 1,
